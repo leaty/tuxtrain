@@ -1,0 +1,12 @@
+[Unit]
+Description=TuxTrain Daemon
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=2
+ExecStart=/usr/bin/tuxtraind
+
+[Install]
+WantedBy=multi-user.target
+
