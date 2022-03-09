@@ -1,0 +1,70 @@
+# Name and version of trainer, this has no significance other than output
+name = "My Trainer"
+version = '0.0.1'
+
+# Based on /proc/pid/comm which is usually always the executable.
+# This is used when probing for a process.
+# TODO: Might add more ways to probe if needed
+process = "someprocess"
+
+# Set to false to disable trainer
+enable = true
+
+# Settings for the daemon only
+[daemon]
+# When a matching process is discovered, delay by (ms).
+# Useful for when the important memory addresses don't exist yet, or
+# if you need to wait until something happens before running the trainer.
+# TODO: This may be useful for features as well
+delay = 2000 
+
+# A feature in the trainer
+[[feature]]
+name = "FPS Unlock"
+
+# Memory address region, based on /proc/pid/maps but in decimal.
+#
+# If you don't define a region at all it will search through the full
+# process memory. This can be slow depending on how much memory the process
+# is using, so consider tightening the region, more on that below:
+#
+# When tuxtrain finds the pattern it will output the exact address range
+# and you can consider tightening it here. However, it may not always
+# work to tighten it fully, because for some programs, the pattern may
+# not always appear in the same region.
+region = [7123045, 9124418]
+
+# Hexadecimal patterns, this is what tuxtrain will search for and
+# replace within the desired region. This might be a really good time
+# to finally bring out your monospace fonts to match up these patterns,
+# the perfect alignment lets you know exactly what will be replaced.
+# FYI: There's a reason it's called "pattern" instead of "search", heh.
+#
+# See below explanation:
+# 
+# => pattern:
+# __ will be ignored during search, a must have for variable memory.
+#
+# However, it's worth noting that the first hex number cannot be "__".
+# Well, that would also be completely useless of course.
+#
+# => replace:
+# __ will be ignored when writing to memory.
+#
+# But, technically it merges "replace" with the original data found
+# after search- that is, "__" becomes whatever was found in memory.
+# Then, it simply overwrites using the full range of bytes, saves
+# a few memory write operations.
+pattern = "FF __ CB 00 7F __ __ D0"
+replace = "__ __ 9F 5C __ 58 88 __"
+
+# Set to false to disable feature
+enable = true 
+
+# Another feature in the trainer
+[[feature]]
+name = "Infinite Ammo"
+region = [52030, 73204]
+pattern = "FF 00 __ 00 __ __ 7F 58 D0"
+replace = "__ __ __ __ 0B 4C __ __ __"
+enable = true
