@@ -5,6 +5,8 @@ authors = ["leaty <dev@leaty.net>"]
 edition = "2021"
 license = "MIT"
 readme = "README.md"
+description = "An easy-to-use generic trainer for Linux"
+repository = "https://github.com/leaty/tuxtrain"
 
 [[bin]]
 name = "tuxtrain"
