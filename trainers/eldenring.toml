@@ -1,0 +1,58 @@
+# -----------------------------------------------------------------------
+# NOTICE: DO NOT RUN THIS WITH EAC ENABLED.
+#
+# TuxTrain is generic and it doesn't care what you are doing, therefor
+# it does NOT care about something like EAC. I've not yet heard anyone
+# neither try nor getting banned for unlocking their FPS, but I don't
+# think you want to be the first either. It is also unfair when others
+# are forced to play at 60 FPS.
+#
+# The regions in this trainer are fully tightened, I am not entirely sure
+# if they are the same for different versions/releases of Elden Ring.
+#
+# If tuxtrain cannot find the pattern, please create an issue!
+# See below for how to find the correct region for your version:
+#
+# The interesting maps (based on /proc/pid/maps) should look like below.
+# Convert the addresses (e.g. 140000000-140001000 for [start, end]) to
+# decimal and try it as region. Or remove the region entirely to search
+# the entire process memory (this may take some time), tuxtrain will then
+# output the correct region once found.
+#
+# ----------------
+# 140000000-140001000 rwxp 00000000 103:02 3288569595 /home/user/games/elden-ring/drive_c/Games/ELDEN RING/Game/eldenring.exe
+# 140001000-14452b000 rwxp 00000000 00:00 0 
+# 14452b000-1457c9000 rwxp 00000000 00:00 0 
+# 16fff0000-16fff1000 rwxp 00000000 00:00 0 
+# ----------------
+#
+# CREDITS:
+# The current hexadecimal patterns were taken from:
+# https://github.com/uberhalit/EldenRingFpsUnlockAndMore
+# -----------------------------------------------------------------------
+name = "Elden Ring Trainer"
+version = '0.0.1'
+process = "eldenring.exe"
+enable = true
+
+[daemon]
+delay = 2000
+
+[[feature]]
+name = "FPS Unlock"
+region = [5383384927, 5383384935]
+pattern = "C7 __ __ __ 88 88 3C EB"
+replace = "__ __ __ 60 0B 36 3B __"
+enable = true
+
+# NOTICE:
+# This does not modify your hertz, it only stops Elden Ring from doing it.
+# In order to stop Elden Ring from actually forcing your monitor
+# (on X11) to 60hz, make sure to either run the daemon (tuxtraind)
+# or start tuxtrain quickly after launching the game.
+[[feature]]
+name = "Hz Unlock"
+region = [5395294933, 5395294949]
+pattern = "EB __ C7 __ __ 3C 00 00 00 C7 __ __ 01 00 00 00"
+replace = "__ __ __ __ __ 00 __ __ __ __ __ __ 00 __ __ __"
+enable = true
