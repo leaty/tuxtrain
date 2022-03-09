@@ -1,4 +1,6 @@
 # TuxTrain
+[![crates.io](https://img.shields.io/crates/v/tuxtrain.svg)](https://crates.io/crates/tuxtrain)
+[![Documentation](https://docs.rs/tuxtrain/badge.svg)](https://docs.rs/tuxtrain)
 
 An easy-to-use generic trainer for Linux written in Rust, with basic memory hacking features. Use it for your games or applications where needed, there is also the `tuxtraind` daemon which will probe for processes and apply matching trainers automatically.
 
