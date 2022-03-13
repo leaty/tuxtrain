@@ -56,3 +56,10 @@ region = [5395294933, 5395294949]
 pattern = "EB __ C7 __ __ 3C 00 00 00 C7 __ __ 01 00 00 00"
 replace = "__ __ __ __ __ 00 __ __ __ __ __ __ 00 __ __ __"
 enable = true
+
+[[feature]]
+name = "Aspect Ratio Unlock"
+region = [5395287331, 5395287348]
+pattern = "8B __ 85 __ 74 __ 44 8B __ __ 45 85 __ 74 __ 41 8B"
+replace = "__ __ __ __ EB __ __ __ __ __ __ __ __ __ __ __ __"
+enable = false
