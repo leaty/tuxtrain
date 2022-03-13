@@ -31,9 +31,9 @@
 # https://github.com/uberhalit/EldenRingFpsUnlockAndMore
 # -----------------------------------------------------------------------
 name = "Elden Ring Trainer"
-version = '0.0.1'
+version = '0.0.2'
 process = "eldenring.exe"
-enable = true
+enable = false
 
 [daemon]
 delay = 2000
@@ -43,7 +43,7 @@ name = "FPS Unlock"
 region = [5383384927, 5383384935]
 pattern = "C7 __ __ __ 88 88 3C EB"
 replace = "__ __ __ 60 0B 36 3B __"
-enable = true
+enable = false
 
 # NOTICE:
 # This does not modify your hertz, it only stops Elden Ring from doing it.
@@ -55,7 +55,7 @@ name = "Hz Unlock"
 region = [5395294933, 5395294949]
 pattern = "EB __ C7 __ __ 3C 00 00 00 C7 __ __ 01 00 00 00"
 replace = "__ __ __ __ __ 00 __ __ __ __ __ __ 00 __ __ __"
-enable = true
+enable = false
 
 # Custom resolution
 # By default replaces the 1920x1080 option with 3440x1440 where:
