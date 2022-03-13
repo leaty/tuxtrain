@@ -57,6 +57,22 @@ pattern = "EB __ C7 __ __ 3C 00 00 00 C7 __ __ 01 00 00 00"
 replace = "__ __ __ __ __ 00 __ __ __ __ __ __ 00 __ __ __"
 enable = true
 
+# Custom resolution
+# By default replaces the 1920x1080 option with 3440x1440 where:
+#	"70 0D" is 3440 but flipped
+#	"A0 05" is 1440 but flipped
+#
+# To customize the resolution:
+#	1. Convert your custom width and height to hexadecimal
+#	2. Flip the two hexadecimal bytes, e.g. "07 80" for 1920 becomes "80 07".
+[[feature]]
+name = "Custom Resolution"
+region = [5429833656, 5429833672]
+#pattern = "00 05 00 00 D0 02 00 00 A0 05 00 00 2A 03 00 00" # Option 1280x720 using "00 05" and "D0 02"
+pattern = "80 07 00 00 38 04 00 00 00 08 00 00 80 04 00 00" # Option 1920x1080 using "80 07" and "38 04"
+replace = "70 0D __ __ A0 05 __ __ __ __ __ __ __ __ __ __" # Replace with 3440x1440 using "07 80" and "A0 05"
+enable = false
+
 [[feature]]
 name = "Aspect Ratio Unlock"
 region = [5395287331, 5395287348]
