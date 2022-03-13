@@ -13,18 +13,20 @@
 # If tuxtrain cannot find the pattern, please create an issue!
 # See below for how to find the correct region for your version:
 #
-# The interesting maps (based on /proc/pid/maps) should look like below.
-# Convert the addresses (e.g. 140000000-140001000 for [start, end]) to
-# decimal and try it as region. Or remove the region entirely to search
-# the entire process memory (this may take some time), tuxtrain will then
-# output the correct region once found.
+#	- Either remove the region entirely to search the entire process
+#	memory (this may take some time), tuxtrain will then output the
+#	correct region once found.
 #
-# ----------------
-# 140000000-140001000 rwxp 00000000 103:02 3288569595 /home/user/games/elden-ring/drive_c/Games/ELDEN RING/Game/eldenring.exe
-# 140001000-14452b000 rwxp 00000000 00:00 0 
-# 14452b000-1457c9000 rwxp 00000000 00:00 0 
-# 16fff0000-16fff1000 rwxp 00000000 00:00 0 
-# ----------------
+#	- Or manually try each map (based on /proc/pid/maps), they should
+#	look similar to below. Convert the addresses to decimal
+#	(e.g. 140000000-140001000 for [start, end]), it's likely the ones close
+#	in number to the preset regions in this file.
+#	----------------
+#	140000000-140001000 rwxp 00000000 103:02 3288569595 /home/user/games/elden-ring/drive_c/Games/ELDEN RING/Game/eldenring.exe
+#	140001000-14452b000 rwxp 00000000 00:00 0
+#	14452b000-1457c9000 rwxp 00000000 00:00 0
+#	16fff0000-16fff1000 rwxp 00000000 00:00 0
+#	----------------
 #
 # CREDITS:
 # The current hexadecimal patterns were taken from:
@@ -70,7 +72,7 @@ name = "Custom Resolution"
 region = [5429833656, 5429833672]
 #pattern = "00 05 00 00 D0 02 00 00 A0 05 00 00 2A 03 00 00" # Option 1280x720 using "00 05" and "D0 02"
 pattern = "80 07 00 00 38 04 00 00 00 08 00 00 80 04 00 00" # Option 1920x1080 using "80 07" and "38 04"
-replace = "70 0D __ __ A0 05 __ __ __ __ __ __ __ __ __ __" # Replace with 3440x1440 using "07 80" and "A0 05"
+replace = "70 0D __ __ A0 05 __ __ __ __ __ __ __ __ __ __" # Replace with 3440x1440 using "70 0D" and "A0 05"
 enable = false
 
 [[feature]]
