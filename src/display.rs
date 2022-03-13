@@ -21,7 +21,7 @@ pub fn feature(hack: &Hack) {
 	println!("\t{}", hack.name.green().bold());
 }
 
-pub fn feature_result(result: &HackResult) {
+pub fn feature_result(hack: &Hack, result: &HackResult) {
 	match result {
 		Ok(info) => {
 			println!("\t  - {}: {}", "Location".cyan(), info.at);
@@ -35,6 +35,8 @@ pub fn feature_result(result: &HackResult) {
 				"Wrote".cyan(),
 				hex::encode(&info.wrote).to_uppercase()
 			);
+
+			feature_consider(hack, info);
 		}
 		Err(e) => {
 			println!("\t  - {}: {}", "Error".red().bold(), e)
