@@ -27,9 +27,11 @@ impl Trainer {
 		let proc = self.probe();
 		if let Ok(proc) = proc {
 			for feature in &self.features {
-				display.then(|| display::feature(feature));
-				let res = feature.run(&proc);
-				display.then(|| display::feature_result(&feature, &res));
+				if feature.enable {
+					display.then(|| display::feature(feature));
+					let res = feature.run(&proc);
+					display.then(|| display::feature_result(&feature, &res));
+				}
 			}
 		} else if let Err(e) = proc {
 			display.then(|| display::trainer_err(&e));
