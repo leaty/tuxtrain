@@ -55,7 +55,7 @@ pub fn feature_consider(hack: &Hack, info: &HackInfo) {
 
 	if consider {
 		println!(
-			"\t  - {}: [{}, {}].",
+			"\t  - {}: [{}, {}]",
 			"Consider tightening region".cyan(),
 			info.at,
 			info.at + info.found.len(),
