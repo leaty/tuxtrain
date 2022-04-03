@@ -60,7 +60,6 @@ pub fn search(
 
 		// End of region, never found it sadly
 		if pointer == end {
-			// println!("{} | {}", region.0, region.1);
 			break;
 		}
 	}
