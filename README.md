@@ -41,7 +41,12 @@ enable = true
 ## Installation
 
 ### Arch Linux
-Will be distributed to Arch AUR soon, unless someone else does it before me.
+The official AUR can be found here: https://aur.archlinux.org/packages/tuxtrain
+
+*Or* use an AUR helper like [paru](https://github.com/Morganamilo/paru) or [yay](https://github.com/Jguer/yay).
+```bash
+paru -S tuxtrain
+```
 
 ### Manually
 Clone and run:
