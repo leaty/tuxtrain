@@ -21,7 +21,7 @@ pub fn feature(hack: &Hack) {
 	println!("\t{}", hack.name.green().bold());
 }
 
-pub fn feature_result(hack: &Hack, result: &HackResult) {
+pub fn feature_result(hack: &Hack, result: &HackResult, full: bool) {
 	match result {
 		Ok(info) => {
 			println!("\t  - {}: {}", "Location".cyan(), info.at);
@@ -36,7 +36,7 @@ pub fn feature_result(hack: &Hack, result: &HackResult) {
 				hex::encode(&info.wrote).to_uppercase()
 			);
 
-			feature_consider(hack, info);
+			feature_consider(hack, info, full);
 		}
 		Err(e) => {
 			println!("\t  - {}: {}", "Error".red().bold(), e)
@@ -44,9 +44,9 @@ pub fn feature_result(hack: &Hack, result: &HackResult) {
 	}
 }
 
-pub fn feature_consider(hack: &Hack, info: &HackInfo) {
+pub fn feature_consider(hack: &Hack, info: &HackInfo, full: bool) {
 	let mut consider = true;
-	if let Some(region) = hack.region {
+	if let (false, Some(region)) = (full, hack.region) {
 		// Region is already as tight as it gets
 		if info.at == region.0 && info.at + info.found.len() == region.1 {
 			consider = false;

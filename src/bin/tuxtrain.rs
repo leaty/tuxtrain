@@ -16,6 +16,8 @@ Omit this field to run all trainers"#)]
 	trainer_file: Option<PathBuf>,
 	#[clap(short, long, help = "Don't print messages")]
 	silent: bool,
+	#[clap(short, long, help = "Full memory scan, ignoring region presets")]
+	full: bool,
 }
 
 fn main() -> Result<(), Box<dyn Error>> {
@@ -26,7 +28,7 @@ fn main() -> Result<(), Box<dyn Error>> {
 	// Run trainers
 	for trainer in trainers {
 		if trainer.enable {
-			trainer.run(!args.silent);
+			trainer.run(args.full, !args.silent);
 		}
 	}
 

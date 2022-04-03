@@ -20,6 +20,8 @@ Omit this field to run all trainers"#)]
 	trainer_file: Option<PathBuf>,
 	#[clap(short, long, help = "Don't print messages")]
 	silent: bool,
+	#[clap(short, long, help = "Full memory scan, ignoring region presets")]
+	full: bool,
 	#[clap(
 		short,
 		long,
@@ -44,7 +46,7 @@ fn main() -> Result<(), Box<dyn Error>> {
 				if trainer.probe().is_ok() {
 					if !status.contains(&idx) {
 						delay(trainer);
-						trainer.run(!args.silent);
+						trainer.run(args.full, !args.silent);
 						status.insert(idx);
 					}
 				// Process disappeared

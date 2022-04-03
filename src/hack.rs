@@ -17,12 +17,13 @@ pub struct Hack {
 }
 
 impl Hack {
-	pub fn run(&self, proc: &Process) -> HackResult {
+	pub fn run(&self, proc: &Process, full: bool) -> HackResult {
 		let pid = Pid::from_raw(proc.pid);
-		let regions = match self.region.clone() {
-			Some(r) => vec![r],
-			// No predefined regions, use all
-			None => proc
+
+		// Set which region to scan, or full memory scan
+		let regions = match (full, self.region.clone()) {
+			(false, Some(r)) => vec![r],
+			_ => proc
 				.maps()?
 				.iter()
 				.map(|m| (m.address.0 as usize, m.address.1 as usize))

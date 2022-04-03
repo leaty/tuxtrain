@@ -21,7 +21,7 @@ pub struct Trainer {
 }
 
 impl Trainer {
-	pub fn run(&self, display: bool) {
+	pub fn run(&self, full: bool, display: bool) {
 		display.then(|| display::trainer(&self));
 
 		let proc = self.probe();
@@ -29,8 +29,8 @@ impl Trainer {
 			for feature in &self.features {
 				if feature.enable {
 					display.then(|| display::feature(feature));
-					let res = feature.run(&proc);
-					display.then(|| display::feature_result(&feature, &res));
+					let res = feature.run(&proc, full);
+					display.then(|| display::feature_result(&feature, &res, full));
 				}
 			}
 		} else if let Err(e) = proc {
