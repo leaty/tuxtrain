@@ -9,4 +9,3 @@ ExecStart=/usr/bin/tuxtraind
 
 [Install]
 WantedBy=multi-user.target
-
