@@ -34,7 +34,7 @@
 #	- https://github.com/gurrgur/er-patcher
 # -----------------------------------------------------------------------
 name = "Elden Ring Trainer"
-version = '0.0.2'
+version = '0.0.3'
 process = "eldenring.exe"
 enable = false
 
