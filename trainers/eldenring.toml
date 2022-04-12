@@ -30,7 +30,8 @@
 #
 # CREDITS:
 # The current hexadecimal patterns were taken from:
-# https://github.com/uberhalit/EldenRingFpsUnlockAndMore
+#	- https://github.com/uberhalit/EldenRingFpsUnlockAndMore
+#	- https://github.com/gurrgur/er-patcher
 # -----------------------------------------------------------------------
 name = "Elden Ring Trainer"
 version = '0.0.2'
@@ -80,4 +81,15 @@ name = "Aspect Ratio Unlock"
 region = [5395287331, 5395287348]
 pattern = "8B __ 85 __ 74 __ 44 8B __ __ 45 85 __ 74 __ 41 8B"
 replace = "__ __ __ __ EB __ __ __ __ __ __ __ __ __ __ __ __"
+enable = false
+
+# Increases animation distance
+# May also fix low frames for enemy animations when:
+#	- using ultrawide resolutions
+#	- enemies are outside the regular 16:9 screen space
+[[feature]]
+name = "Animation Distance Boost"
+region = [5379914000, 5379914030]
+pattern = "E8 __ __ __ __ 0F 28 __ 0F 28 __ E8 __ __ __ __ F3 0F __ __ 0F 28 __ F3 41 0F 5E 4C 24 54"
+replace = "__ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ 0F 57 C9 66 0F EF C9"
 enable = false
