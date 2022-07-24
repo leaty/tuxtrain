@@ -1,29 +1,29 @@
 name = "Sekiro Trainer"
 version = '0.0.1'
 process = "sekiro.exe"
-enable = true
+enable = false
 
 [daemon]
 delay=2000
 
-#Pattern taken from Sekiro FPS Unlock And More project:
-#https://github.com/uberhalit/SekiroFpsUnlockAndMore/blob/d6312c6b0af0bcdf987568e1490b7d842548ae99/SekiroFpsUnlockAndMore/GameData.cs#L44
-#Hex values calculated using the following python script:
-#   import struct
-#   struct.pack('<f', 84.0).hex()
+ #Pattern taken from Sekiro FPS Unlock And More project:
+ #https://github.com/uberhalit/SekiroFpsUnlockAndMore/blob/d6312c6b0af0bcdf987568e1490b7d842548ae99/SekiroFpsUnlockAndMore/GameData.cs#L44
+ #Hex values calculated using the following python script:
+ #   import struct
+ #   struct.pack('<f', 84.0).hex()
 [[feature]]
 name = "Fix game speed for framelock (to 84)"
 pattern = "F3 0F 58 __ 0F C6 __ 00 0F 51 __ F3 0F 59 __ __ __ __ __ 0F 2F"
 replace = "__ __ __ __ __ __ __ __ __ __ __ __ __ __ __ 00 00 A8 42 __ __"
-enable = true
+enable = false
 
-#Pattern taken from Sekiro FPS Unlock And More project:
-#https://github.com/uberhalit/SekiroFpsUnlockAndMore/blob/d6312c6b0af0bcdf987568e1490b7d842548ae99/SekiroFpsUnlockAndMore/GameData.cs#L28
-#Hex values calculated using the following python script:
-#   import struct
-#   struct.pack('<f', 1 / 165).hex()
+ #Pattern taken from Sekiro FPS Unlock And More project:
+ #https://github.com/uberhalit/SekiroFpsUnlockAndMore/blob/d6312c6b0af0bcdf987568e1490b7d842548ae99/SekiroFpsUnlockAndMore/GameData.cs#L28
+ #Hex values calculated using the following python script:
+ #   import struct
+ #   struct.pack('<f', 1 / 165).hex()
 [[feature]]
 name = "Set FPS Framelock (to 165)"
 pattern = "C7 43 __ __ 88 88 3C 4C 89 AB"
 replace = "__ __ __ 0C 98 C6 3B __ __ __"
-enable = true
+enable = false
