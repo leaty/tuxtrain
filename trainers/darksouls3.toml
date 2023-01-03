@@ -1,0 +1,50 @@
+# -----------------------------------------------------------------------
+# NOTICE: I DO NOT RECOMMEND USING THIS WHILE PLAYING ONLINE.
+# ..but you'll probably be okay.
+#
+# The regions in this trainer are fully tightened, just remove them if tuxtrain
+# cannot find the pattern (due to different versions etc.).
+#
+# CREDITS:
+# The current hexadecimal pattern was found with the help of debugging this mod:
+# https://github.com/0dm/DS3DebugFPS
+# -----------------------------------------------------------------------
+name = "Dark Souls III Trainer"
+version = '0.0.1'
+process = "DarkSoulsIII.ex" # Kernel cutoff fun
+enable = false
+
+[daemon]
+delay = 2000
+
+# NOTICE: You need to play in windowed mode, because there's also a
+# refresh rate cap at 60Hz in fullscreen, which goes away in windowed mode.
+#
+# Unfortunately the game engine isn't built for anything higher than 60, so this
+# may or may not cause weirdness such as slow rolls/and or inability to run at times.
+#
+# One interesting note, the default here is "technically" 30 FPS (F0 41), but because
+# of the next hexadecimal byte being "00" this fps limit isn't used, so it's instead
+# capped at 60 FPS for a different reason. Changing "00" to "01" enables this limiter.
+#
+# Pick your poison here:
+#	"00 00 F0 41" - 30 FPS (console-like, yuck)
+#	"00 00 70 42" - 60 FPS (but why?)
+#	"00 00 8C 42" - 70 FPS
+#	"00 00 A0 42" - 80 FPS
+#	"00 00 B4 42" - 90 FPS (probably the most balanced, but don't fear trying higher)
+#	"00 00 C8 42" - 100 FPS
+#	"00 00 DC 42" - 110 FPS
+#	"00 00 F0 42" - 120 FPS
+#	"00 00 02 43" - 130 FPS
+#	"00 00 10 43" - 144 FPS (default, works okay with some occasional issues)
+#	"00 00 7A 44" - 1000 FPS (only the future will tell)
+#	"00 40 9C 45" - 5000 FPS (dude?)
+#
+# ..Or make your own, they're just floats in hexadecimal.
+[[feature]]
+name = "FPS Unlock"
+region = [132211620, 132211628]
+pattern = "00 00 F0 41 00 FE E0 07"
+replace = "00 00 10 43 01 __ __ __"
+enable = false
