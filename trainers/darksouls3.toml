@@ -2,9 +2,10 @@
 # NOTICE: I DO NOT RECOMMEND USING THIS WHILE PLAYING ONLINE.
 # ..but you'll probably be okay.
 #
-# The memory regions in this trainer are not tightened, so it's not crazy fast.
-# This is because the pattern apparently moves around a lot depending on different
-# wine/proton builds.
+# The memory regions in this trainer are not tightened, so it may not be crazy fast
+# at finding the pattern. This is because it apparently moves around a lot depending
+# on different wine/proton builds. However, TuxTrain will print the correct region
+# once found- so set it manually if you want it to be more efficient.
 #
 # CREDITS:
 # The current hexadecimal pattern was found with the help of debugging this mod:
@@ -45,6 +46,7 @@ delay = 2000
 # ..Or make your own, they're just floats in hexadecimal.
 [[feature]]
 name = "FPS Unlock"
+# region = [140735844279204, 140735844279210]
 pattern = "00 00 F0 41 00 FE"
 replace = "00 00 10 43 01 __"
 enable = false
