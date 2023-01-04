@@ -54,7 +54,7 @@ Clone and run:
 cargo install --path .
 ```
 
-This will by default install `tuxtrain` and `tuxtraind` to `~/.cargo/bin`. You can add this to your PATH if you wish.
+This will by default install `tuxtrain` and `tuxtraind` to `~/.cargo/bin`. You can add this to your PATH if you wish. Next, you may want to create the directory `/etc/tuxtrain` and copy the trainers you want there, otherwise you can only use `tuxtrain -t path/to/trainer.toml`.
 
 ## Running TuxTrain
 Since accessing and writing memory in foreign processes require certain permissions, TuxTrain must almost always run as root, unless you manually take ownership of the process.
