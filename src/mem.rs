@@ -15,7 +15,6 @@ pub fn search(
 	let find = pattern.len();
 	let mut chunk_size = CHUNK_SIZE;
 	let mut pointer = region.0;
-	let mut criteria = pattern.iter();
 	let mut found = vec![];
 	let mut at = 0;
 
@@ -28,26 +27,33 @@ pub fn search(
 		// Read memory region one chunk at a time
 		let chunk = read(pid, pointer, chunk_size)?;
 
-		// Try to find pattern
-		for (idx, mbyte) in chunk.iter().enumerate() {
-			if let Some(byte) = criteria.next().unwrap() {
-				// Found one
-				if byte == mbyte {
-					found.push(*mbyte);
+		// Go through chunk per byte, forward-match with pattern each time
+		for i in 0..chunk.len() {
+			chunk
+				.iter()
+				.skip(i)
+				.zip(pattern.iter().skip(found.len()))
+				.all(|(mbyte, cbyte)| {
+					match cbyte {
+						// Store matching bytes
+						// None "__" criteria always matches
+						Some(b) if b == mbyte => found.push(*mbyte),
+						None => found.push(*mbyte),
+
+						// Doesn't match, reset
+						_ => {
+							found.clear();
+							return false;
+						}
+					};
 
 					// Set "at" on first discovery
 					if found.len() == 1 {
-						at = pointer + idx;
+						at = pointer + i;
 					}
-				} else {
-					// Doesn't match, reset
-					found.clear();
-					criteria = pattern.iter();
-				}
-			} else {
-				// Skip (None) is still considered found
-				found.push(*mbyte);
-			}
+
+					return true;
+				});
 
 			// Found what there is to find
 			if found.len() == find {
