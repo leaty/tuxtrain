@@ -1,5 +1,5 @@
 name = "Sekiro Trainer"
-version = '0.0.1'
+version = '0.0.2'
 process = "sekiro.exe"
 enable = false
 
@@ -7,23 +7,49 @@ enable = false
 delay=2000
 
 # Pattern taken from Sekiro FPS Unlock And More project:
+# https://github.com/uberhalit/SekiroFpsUnlockAndMore/blob/d6312c6b0af0bcdf987568e1490b7d842548ae99/SekiroFpsUnlockAndMore/GameData.cs#L28
+# Hex values calculated using the following python script:
+#	import struct
+#	struct.pack('<f', 1 / 165).hex()
+#
+# Some precalculated examples:
+#	"89 88 08 3C" - 120 FPS
+# 	"39 8E E3 3B" - 144 FPS
+# 	"0C 98 C6 3B" - 165 FPS
+# 	"D6 B9 72 3B" - 270 FPS
+#
+# Extra 1: Not that you really need it but, depending on your setup it might
+# not go over your max refresh rate, this can be fixed by disabling VSYNC.
+# Disabling VSYNC does have the potential to also improve input lag.
+# Add dxvk.conf to your game dir with the contents:
+#	dxgi.syncInterval = 0
+#
+# Extra 2: This is a less accurate pattern and seems to require region,
+# but allows for changing the FPS again without restarting the game.
+# pattern = "C7 43 __ __ __ __ __ 4C 89 AB"
+[[feature]]
+name = "Set FPS Framelock"
+region = [5387235709, 5387235719]
+pattern = "C7 43 __ __ 88 88 3C 4C 89 AB"
+replace = "__ __ __ 0C 98 C6 3B __ __ __"
+enable = false
+
+# Pattern taken from Sekiro FPS Unlock And More project:
 # https://github.com/uberhalit/SekiroFpsUnlockAndMore/blob/d6312c6b0af0bcdf987568e1490b7d842548ae99/SekiroFpsUnlockAndMore/GameData.cs#L44
 # Hex values calculated using the following python script:
 #    import struct
 #    struct.pack('<f', 84.0).hex()
+#
+# This should be set to roughly half of your FPS Framelock.
+#
+# NOTICE: In my experience this just crashes the game, I don't think this is correct.
+# According to this: https://github.com/Lahvuun/sekirofpsunlock/blob/1ccc98c0de847dd0c1837381ef6e05ea423b8d2d/src/fps.c#L142
+# It finds the pattern at pos 5376960685 just like this does, but then
+# proceeds to write all the way over at pos 5421699608 instead.
+# More research needed.
 [[feature]]
-name = "Fix game speed for framelock (to 84)"
+name = "Fix game speed for framelock"
+region = [5376960685, 5376960706]
 pattern = "F3 0F 58 __ 0F C6 __ 00 0F 51 __ F3 0F 59 __ __ __ __ __ 0F 2F"
 replace = "__ __ __ __ __ __ __ __ __ __ __ __ __ __ __ 00 00 A8 42 __ __"
-enable = false
-
-# Pattern taken from Sekiro FPS Unlock And More project:
-# https://github.com/uberhalit/SekiroFpsUnlockAndMore/blob/d6312c6b0af0bcdf987568e1490b7d842548ae99/SekiroFpsUnlockAndMore/GameData.cs#L28
-# Hex values calculated using the following python script:
-#    import struct
-#    struct.pack('<f', 1 / 165).hex()
-[[feature]]
-name = "Set FPS Framelock (to 165)"
-pattern = "C7 43 __ __ 88 88 3C 4C 89 AB"
-replace = "__ __ __ 0C 98 C6 3B __ __ __"
 enable = false
