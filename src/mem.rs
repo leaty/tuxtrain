@@ -8,7 +8,7 @@ use std::fs::File;
 use std::io;
 use std::io::{Seek, SeekFrom, Write};
 
-const CHUNK_SIZE: usize = 1024;
+const CHUNK_SIZE: usize = 1048576;
 
 pub fn search(
 	pid: &Pid,
