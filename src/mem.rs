@@ -1,8 +1,12 @@
 use crate::error::MemError;
 use crate::Pattern;
+use nix::errno::Errno;
 use nix::sys::uio::{process_vm_readv, process_vm_writev};
 use nix::sys::uio::{IoVec, RemoteIoVec};
 use nix::unistd::Pid;
+use std::fs::File;
+use std::io;
+use std::io::{Seek, SeekFrom, Write};
 
 const CHUNK_SIZE: usize = 1024;
 
@@ -107,5 +111,30 @@ pub fn write(pid: &Pid, at: usize, data: &Vec<u8>) -> Result<usize, MemError> {
 		len: data.len(),
 	};
 
-	process_vm_writev(*pid, &[local], &[remote]).map_err(|e| MemError::Write(e.to_string()))
+	// Try to write directly. On EFAULT, it's likely a
+	// protected page so try ptrace instead as fallback
+	match process_vm_writev(*pid, &[local], &[remote]) {
+		Err(Errno::EFAULT) => {
+			write_protected(pid, at as u64, data).map_err(|e| MemError::Write(e.to_string()))
+		}
+		r => r.map_err(|e| MemError::Write(e.to_string())),
+	}
+}
+
+/// Write using ptrace and opening /proc/pid/mem directly.
+/// Used for protected "read-only" pages.
+fn write_protected(pid: &Pid, at: u64, data: &Vec<u8>) -> Result<usize, io::Error> {
+	nix::sys::ptrace::attach(*pid)?;
+
+	let mut f = File::options()
+		.read(true)
+		.write(true)
+		.open(format!("/proc/{}/mem", pid.as_raw()))
+		.unwrap();
+
+	f.seek(SeekFrom::Start(at))?;
+	let r = f.write(data);
+
+	nix::sys::ptrace::detach(*pid, Some(nix::sys::signal::Signal::SIGCONT))?;
+	r
 }
