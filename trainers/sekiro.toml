@@ -29,7 +29,7 @@ delay=2000
 # pattern = "C7 43 __ __ __ __ __ 4C 89 AB"
 [[feature]]
 name = "Set FPS Framelock"
-region = [5387235709, 5387235719]
+region = [5387236685, 5387236695]
 pattern = "C7 43 __ __ 88 88 3C 4C 89 AB"
 replace = "__ __ __ 0C 98 C6 3B __ __ __"
 enable = false
