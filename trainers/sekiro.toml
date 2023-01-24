@@ -35,6 +35,18 @@ replace = "__ __ __ 0C 98 C6 3B __ __ __"
 enable = false
 
 # Pattern taken from Sekiro FPS Unlock And More project:
+# https://github.com/uberhalit/SekiroFpsUnlockAndMore/blob/d6312c6b0af0bcdf987568e1490b7d842548ae99/SekiroFpsUnlockAndMore/GameData.cs#L140
+#
+# This changes a fixed 16:9 aspect ratio to a free-adjustable aspect-ratio based on resolution.
+# This does not add additional resolutions in the game.
+[[feature]]
+name = "Disable 16:9 aspect ratio lock."
+region = [5369932904, 5369932920]
+pattern = "85 C9 74 __ 47 8B __ __ __ __ __ __ 45 __ __ 74"
+replace = "90 90 EB __ 47 8B __ __ __ __ __ __ 45 __ __ 74"
+enable = false
+
+# Pattern taken from Sekiro FPS Unlock And More project:
 # https://github.com/uberhalit/SekiroFpsUnlockAndMore/blob/d6312c6b0af0bcdf987568e1490b7d842548ae99/SekiroFpsUnlockAndMore/GameData.cs#L44
 # Hex values calculated using the following python script:
 #    import struct
