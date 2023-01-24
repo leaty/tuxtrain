@@ -38,7 +38,7 @@ enable = false
 # https://github.com/uberhalit/SekiroFpsUnlockAndMore/blob/d6312c6b0af0bcdf987568e1490b7d842548ae99/SekiroFpsUnlockAndMore/GameData.cs#L140
 #
 # This changes a fixed 16:9 aspect ratio to a free-adjustable aspect-ratio based on resolution.
-# This does not add additional resolutions in the game.
+# Make sure to play in Fullscreen mode, as widescreen resolutions are not present in window mode. This feature does not add additional resolutions.
 [[feature]]
 name = "Disable 16:9 aspect ratio lock."
 region = [5369932904, 5369932920]
