@@ -32,6 +32,7 @@
 # The current hexadecimal patterns were taken from:
 #	- https://github.com/uberhalit/EldenRingFpsUnlockAndMore
 #	- https://github.com/gurrgur/er-patcher
+#	- https://github.com/techiew/EldenRingMods
 # -----------------------------------------------------------------------
 name = "Elden Ring Trainer"
 version = '0.0.3'
@@ -92,4 +93,11 @@ name = "Animation Distance Boost"
 region = [5379914000, 5379914030]
 pattern = "E8 __ __ __ __ 0F 28 __ 0F 28 __ E8 __ __ __ __ F3 0F __ __ 0F 28 __ F3 41 0F 5E 4C 24 54"
 replace = "__ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ 0F 57 C9 66 0F EF C9"
+enable = false
+
+[[feature]]
+name = "Remove Chromatic Aberration"
+pattern = "0F 11 __ 60 __ 8D __ 80 00 00 00 0F 10 __ A0 00 00 00 0F 11 __ F0 __ 8D __ B0 00 00 00 0F 10 __ 0F 11 __ 0F 10 __ 10 __ __ __ __ __ __ __ __ 0F 11 __ __"
+replace = "__ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ 66 0F EF C9"
+region = [5397271058, 5397271109]
 enable = false
