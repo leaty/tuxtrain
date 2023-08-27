@@ -35,7 +35,7 @@
 #	- https://github.com/techiew/EldenRingMods
 # -----------------------------------------------------------------------
 name = "Elden Ring Trainer"
-version = '0.0.3'
+version = '0.0.4'
 process = "eldenring.exe"
 enable = false
 
